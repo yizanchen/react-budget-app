@@ -5,6 +5,7 @@ import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../contexts/BudgetContext";
 export default function AddExpenseModal({ show, handelClose , defaultBudgetId }){
     const descriptionRef = useRef()
     const amountRef = useRef()
+    const dateRef = useRef()
     const budgetIdRef = useRef()
     const { addExpense, budgets } = useBudgets()
 
@@ -14,6 +15,7 @@ export default function AddExpenseModal({ show, handelClose , defaultBudgetId })
         {
             description: descriptionRef.current.value,
             amount: parseFloat(amountRef.current.value),
+            date: dateRef.current.value,
             budgetId: budgetIdRef.current.value,
         })
         handelClose()
@@ -33,6 +35,10 @@ export default function AddExpenseModal({ show, handelClose , defaultBudgetId })
                     <Form.Group className="mb-3" controlId="amount">
                         <FormLabel>Amount</FormLabel>
                         <FormControl ref={amountRef} type="number" required step={0.01} />
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="date">
+                        <FormLabel>Date</FormLabel>
+                        <FormControl ref={dateRef} type="date" required defaultValue={new Date(new Date().toLocaleDateString()).toISOString().substr(0, 10)}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="BudgetId">
                         <FormLabel>Budget</FormLabel>

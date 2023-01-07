@@ -15,7 +15,7 @@ export default function BudgetCard({ name, amount, max, hideButton, onAddExpense
                         )}
                     </div>
                 </Card.Title>
-                {max && <ProgressBar className="rounded-pill" variant={getProgressBarVariant(amount, max)}
+                {max && <ProgressBar className="rounded-pill" label={`(${(amount/max)*100}%)`} variant={getProgressBarVariant(amount, max)}
                 min={0} max={max} now={amount}
                 /> }
                 {!hideButton && <Stack direction="horizontal" gap="2" className="mt-4">

@@ -1,4 +1,4 @@
-import { Button, Modal, Stack } from "react-bootstrap";
+import { Button, Col, Modal, Row, Stack } from "react-bootstrap";
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../contexts/BudgetContext";
 import { currencyFormatter } from "../utils";
 
@@ -30,13 +30,20 @@ export default function ViewExpenseModal({ budgetId, handelClose }){
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Stack direction="vertical" gap="3">
+                    <Stack>
+                    <Row className="d-flex align-items-baseline fw-bold pb-1">
+                        <Col sm={4} xs={4}>Description</Col>
+                        <Col sm={4} xs={4} className="d-flex justify-content-center">Date</Col>
+                        <Col sm={2} xs={2} className="d-flex justify-content-center">$</Col>
+                        <Col sm={2} xs={2} className="d-flex justify-content-end">Delete</Col>
+                    </Row>
                         {expenses.map(expense => (
-                            <Stack direction="horizontal" gap="2" key={expense.id}>
-                                <div className="me-auto fs-4">{expense.description}</div>
-                                <div>{currencyFormatter.format(expense.amount)}</div>
-                                <Button onClick={() => deleteExpense(expense)} size="sm" variant="outline-danger">&times;</Button>
-                            </Stack>
+                            <Row className="d-flex align-items-baseline pb-1" key={expense.id}>
+                                <Col sm={4} xs={4}>{expense.description}</Col>
+                                <Col sm={4} xs={4} className="d-flex justify-content-center">{expense.date}</Col>
+                                <Col sm={2} xs={2} className="d-flex justify-content-center">{currencyFormatter.format(expense.amount)}</Col>
+                                <Col sm={2} xs={2} className="d-flex justify-content-end"><Button onClick={() => deleteExpense(expense)} size="sm" variant="outline-danger">&times;</Button></Col>
+                            </Row>
                         ))}
                     </Stack>
                 </Modal.Body>

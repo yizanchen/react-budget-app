@@ -13,7 +13,7 @@ const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
 const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
 const [showViewExpenseModalBudgetId, setShowViewExpenseModalBudgetId] = useState()
 const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState()
-const { budgets, getBudgetExpenses } = useBudgets()
+const {budgets, getBudgetExpenses } = useBudgets()
 
 function openAddExpenseModal(budgetId){
   setShowAddExpenseModal(true)
@@ -36,6 +36,7 @@ function openAddExpenseModal(budgetId){
             alignItems: "flex-start",
           }}
         >
+          <TotalCard />
           {budgets.map(budget => {
             const amount = getBudgetExpenses(budget.id)
             .reduce( (total, expenses) => total + expenses.amount, 0)
@@ -54,7 +55,6 @@ function openAddExpenseModal(budgetId){
             <UncategorizedBudgetCard 
               onAddExpenseClick={openAddExpenseModal}
               onViewExpenseClick={() => setShowViewExpenseModalBudgetId(UNCATEGORIZED_BUDGET_ID) }/>
-            <TotalCard />
         </div>
       </Container>
       <AddBudgetModal show={showAddBudgetModal} handelClose={() => setShowAddBudgetModal(false)}/>
